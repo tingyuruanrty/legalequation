@@ -3,30 +3,9 @@
 #include <string>
 using namespace std;
 
-int getposition(stack<char>& a, char lookingfor){
-    if(a.top()==lookingfor){
-        return 1;
-    }
-    else{
-        a.pop();
-        return 1+getposition(a,lookingfor);
-    }
-}
-
-bool legal(stack<char>& a){
-    if(getposition(a,'}')<getposition(a,']')&&
-    getposition(a,']')<getposition(a,')')&&
-    getposition(a,')')<getposition(a,'(')&&
-    getposition(a,'(')<getposition(a,'[')&&
-    getposition(a,'[')<getposition(a,'{')){return true;}
-    else {return false;}
-    
-}
-
 int main(){
-    stack<char> equition;
+    stack<char> brackets;
     string input;
-    char lookingfor;
 
     cout<<"enter equition"<<endl;
     getline(cin,input);
@@ -34,7 +13,10 @@ int main(){
     // cin>>lookingfor;
 
     for(char& holder:input){
-        equition.push(holder);
+        if(holder=='('||holder=='['||holder =='{')
+        {
+            brackets.push(holder);
+        }
     }
 
     if(legal(equition)){cout<<"equition is legal";}
