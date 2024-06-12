@@ -9,20 +9,31 @@ int main(){
 
     cout<<"enter equition"<<endl;
     getline(cin,input);
-    // cout<<"enter what are you looking for"<<endl;
-    // cin>>lookingfor;
 
     for(char& holder:input){
         if(holder=='('||holder=='['||holder =='{')
         {
             brackets.push(holder);
         }
+        else if (holder == ')' && brackets.top()=='(')
+        {
+            brackets.pop();
+        }
+        else if (holder == ']' && brackets.top()=='[')
+        {
+            brackets.pop();
+        }
+        else if (holder == '}' && brackets.top()=='{')
+        {
+            brackets.pop();
+        }
+        
     }
 
-    if(legal(equition)){cout<<"equition is legal";}
-    else{cout<<"equition is ilegal";}
-
-    // int result= getposition(equition,lookingfor);
-    // cout<<result;
+    if(brackets.empty()){
+        cout<<"legal"<<endl;
+    }else{
+        cout<<"ilegal"<<endl;
+    }
     
 }
