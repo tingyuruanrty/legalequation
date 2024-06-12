@@ -15,15 +15,15 @@ int main(){
         {
             brackets.push(holder);
         }
-        else if (holder == ')' && brackets.top()=='(')
+        if (holder == ')' && brackets.top()=='(')
         {
             brackets.pop();
         }
-        else if (holder == ']' && brackets.top()=='[')
+        if (holder == ']' && brackets.top()=='[')
         {
             brackets.pop();
         }
-        else if (holder == '}' && brackets.top()=='{')
+        if (holder == '}' && brackets.top()=='{')
         {
             brackets.pop();
         }
