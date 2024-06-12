@@ -3,37 +3,41 @@
 #include <string>
 using namespace std;
 
-int main(){
+bool legal(const string& input)
+{
+    //the stack is used to hold the brackets
     stack<char> brackets;
-    string input;
+    for(const char& holder:input)
+    {
+        //push the bracket founded in string in stack
+        if(holder=='('||holder=='['||holder =='{')
+        {brackets.push(holder);}
+    }
+    for(const char& holder:input)
+    {
+        if (holder == ')' && (brackets.empty()||brackets.top()!='('))
+        {return false;}
+        else if(holder == ')' && brackets.top()=='(')
+        {brackets.pop();}
 
+        if (holder == ']' && (brackets.empty()||brackets.top()!='['))
+        {return false;}
+        else if(holder == ']' && brackets.top()=='[')
+        {brackets.pop();}
+
+        if (holder == '}' && (brackets.empty()||brackets.top()!='{'))
+        {return false;}
+        else if (holder == '}' && brackets.top()=='{')
+        {brackets.pop();}
+    }
+    if(!brackets.empty()){return false;}
+    return true;
+}
+
+int main(){
+    string input;
     cout<<"enter equition"<<endl;
     getline(cin,input);
-
-    for(char& holder:input){
-        if(holder=='('||holder=='['||holder =='{')
-        {
-            brackets.push(holder);
-        }
-        if (holder == ')' && brackets.top()=='(')
-        {
-            brackets.pop();
-        }
-        if (holder == ']' && brackets.top()=='[')
-        {
-            brackets.pop();
-        }
-        if (holder == '}' && brackets.top()=='{')
-        {
-            brackets.pop();
-        }
-        
-    }
-
-    if(brackets.empty()){
-        cout<<"legal"<<endl;
-    }else{
-        cout<<"ilegal"<<endl;
-    }
-    
+    if(legal(input)){cout<<"legal"<<endl;}
+    else{cout<<"illegal"<<endl;}
 }
