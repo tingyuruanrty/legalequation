@@ -3,16 +3,24 @@
 #include <string>
 using namespace std;
 
-bool legal(const string& input)
-{
-    //the stack is used to hold the brackets
+stack<char> put_brackets_in_stack(const string& input){
     stack<char> brackets;
     for(const char& holder:input)
     {
-        //push the bracket founded in string in stack
         if(holder=='('||holder=='['||holder =='{')
         {brackets.push(holder);}
     }
+    return brackets;
+}
+
+
+bool legal(const string& input)
+{
+    //the stack is used to hold the brackets
+    //leverage late in first out
+    stack<char> brackets= put_brackets_in_stack(input);
+
+
     for(const char& holder:input)
     {
         if (holder == ')' && (brackets.empty()||brackets.top()!='('))
@@ -30,14 +38,18 @@ bool legal(const string& input)
         else if (holder == '}' && brackets.top()=='{')
         {brackets.pop();}
     }
-    if(!brackets.empty()){return false;}
-    return true;
+
+    
+    return brackets.empty();
 }
 
 int main(){
-    string input;
+    while(true){
     cout<<"enter equition"<<endl;
+
+    string input;
     getline(cin,input);
+
     if(legal(input)){cout<<"legal"<<endl;}
-    else{cout<<"illegal"<<endl;}
+    else{cout<<"illegal"<<endl;}}
 }
