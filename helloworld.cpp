@@ -35,7 +35,7 @@ bool legal(const string& input)
         if (not_match_or_empty(holder,brackets))
         {return false;}
         else 
-        {brackets.pop();}
+        {if (!brackets.empty())brackets.pop();}
     }
 
     return brackets.empty();
