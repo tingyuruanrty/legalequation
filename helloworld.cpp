@@ -13,35 +13,31 @@ stack<char> put_brackets_in_stack(const string& input){
     return brackets;
 }
 
-bool not_match_or_empty (char a, char b){}
+bool not_match_or_empty (char a, stack<char>b){
+    if(a==')'&&(b.empty()||b.top()!='(')){
+        return true;
+    }else if(a == ']' && (b.empty()||b.top()!='[')){
+        return true;
+    }else if(a == '}' && (b.empty()||b.top()!='{')){
+        return true;
+    }else{
+        return false;
+    }
+}
 
 
 bool legal(const string& input)
 {
-    //the stack is used to hold the brackets
-    //leverage late in first out
-    stack<char> brackets= put_brackets_in_stack(input);
-
+    stack<char> brackets = put_brackets_in_stack(input);
 
     for(const char& holder:input)
     {
-        if (holder == ')' && (brackets.empty()||brackets.top()!='('))
+        if (not_match_or_empty(holder,brackets))
         {return false;}
-        else if(holder == ')' && brackets.top()=='(')
-        {brackets.pop();}
-
-        if (holder == ']' && (brackets.empty()||brackets.top()!='['))
-        {return false;}
-        else if(holder == ']' && brackets.top()=='[')
-        {brackets.pop();}
-
-        if (holder == '}' && (brackets.empty()||brackets.top()!='{'))
-        {return false;}
-        else if (holder == '}' && brackets.top()=='{')
+        else 
         {brackets.pop();}
     }
 
-    
     return brackets.empty();
 }
 
