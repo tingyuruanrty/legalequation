@@ -13,6 +13,8 @@ stack<char> put_brackets_in_stack(const string& input){
     return brackets;
 }
 
+bool not_match_or_empty (char a, char b){}
+
 
 bool legal(const string& input)
 {
